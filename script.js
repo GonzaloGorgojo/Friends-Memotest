@@ -1,13 +1,16 @@
 const $carta = document.querySelectorAll('.carta');
 const $puntaje = document.querySelector('#puntaje');
+const $mayorPuntaje = document.querySelector('#mayorPuntaje');
+const $botonReinicio = document.querySelector('#botonReinicio');
 
 let imagenes = ["/imgs/chandler.jpeg", "/imgs/joey.jpg", "/imgs/monica.webp", "/imgs/phoebe.jpeg", "/imgs/rachel.webp", "/imgs/ross.webp"];
+let numerosImagenes = ["./numbers/1.png", "./numbers/2.png", "./numbers/3.png", "./numbers/4.png", "./numbers/5.png", "./numbers/6.png", "./numbers/7.png", "./numbers/8.png", "./numbers/9.png", "./numbers/10.png", "./numbers/11.png", "./numbers/12.png",]
+
 let listaUrlImagenesClickeadas = [];
 let listaIdsImagenesClickeadas = [];
 let listaImagenCobertora = [];
 let contador = 0;
 let puntaje = 0;
-
 
 window.onload = function () {
     ordenarImagenes();
@@ -45,7 +48,10 @@ function comparar(IMAGEN_CLICKEADA) {
         $carta[IMAGEN_CLICKEADA].setAttribute("src", imagenes[IMAGEN_CLICKEADA]);
     }
     if (contador > 1) {
-        if (listaUrlImagenesClickeadas[listaUrlImagenesClickeadas.length - 2] === listaUrlImagenesClickeadas[listaUrlImagenesClickeadas.length - 1]) {
+        if (listaIdsImagenesClickeadas[listaIdsImagenesClickeadas.length - 2] === listaIdsImagenesClickeadas[listaIdsImagenesClickeadas.length - 1]) {
+            $carta[listaIdsImagenesClickeadas[listaIdsImagenesClickeadas.length - 2]].setAttribute("src", listaImagenCobertora[listaImagenCobertora.length - 2]);
+        }
+        else if (listaUrlImagenesClickeadas[listaUrlImagenesClickeadas.length - 2] === listaUrlImagenesClickeadas[listaUrlImagenesClickeadas.length - 1]) {
             setTimeout(() => {
                 $carta[listaIdsImagenesClickeadas[listaIdsImagenesClickeadas.length - 1]].style.visibility = "hidden"
                 $carta[listaIdsImagenesClickeadas[listaIdsImagenesClickeadas.length - 2]].style.visibility = "hidden"
@@ -62,10 +68,29 @@ function comparar(IMAGEN_CLICKEADA) {
     }
 }
 
-/*
 function compronarGano() {
-    if ($carta[].style.visibility === "hidden") {
-        alert('ganaste')
+    let listadoAcertadas = [];
+    for (let i = 0; i < $carta.length; i++) {
+        if ($carta[i].style.visibility === "hidden") {
+            listadoAcertadas.push(i)
+        }
+    }
+    if (listadoAcertadas.length === 12) {
+        $mayorPuntaje.innerHTML = Number($puntaje.innerHTML);
+        alert('Felicitaciones Ganaste !');
+        if (Number($mayorPuntaje.innerHTML) > Number($puntaje.innerHTML)) {
+            $mayorPuntaje.innerHTML = $puntaje.innerHTML;
+        }
+        puntaje = 0;
+        $puntaje.innerHTML = puntaje;
+        $botonReinicio.style.display = 'block';
     }
 }
-*/
+$botonReinicio.onclick = function () {
+    $botonReinicio.style.display = 'none';
+    for (let i = 0; i < $carta.length; i++) {
+        $carta[i].style.visibility = 'visible';
+        $carta[i].setAttribute("src", numerosImagenes[i])
+    }
+    imagenes.sort(() => Math.random() - 0.5);
+}
