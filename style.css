@@ -1,0 +1,6 @@
+@media only screen and (min-width: 748px) {
+    .row{
+        width: 60vw;
+        margin-left: 10vw;
+    }
+ }
