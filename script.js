@@ -3,7 +3,7 @@ const $puntaje = document.querySelector('#puntaje');
 const $mayorPuntaje = document.querySelector('#mayorPuntaje');
 const $botonReinicio = document.querySelector('#botonReinicio');
 
-let imagenes = ["./imgs/chandler.jpg", "./imgs/joey.jpg", "./imgs/monica.jpg", "./imgs/phoebe.jpg", "./imgs/rachel.jpg", "./imgs/ross.jpg"];
+let imagenes = ["./imgs/android.png", "./imgs/mac.png", "./imgs/firefox.png", "./imgs/google.png", "./imgs/linux.png", "./imgs/windows.png"];
 let numerosImagenes = ["./numbers/1.png", "./numbers/2.png", "./numbers/3.png", "./numbers/4.png", "./numbers/5.png", "./numbers/6.png", "./numbers/7.png", "./numbers/8.png", "./numbers/9.png", "./numbers/10.png", "./numbers/11.png", "./numbers/12.png",]
 
 let listaUrlImagenesClickeadas = [];
