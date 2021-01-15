@@ -29,8 +29,6 @@ function clickUsuario(e) {
     listaIdsImagenesClickeadas.push(IMAGEN_CLICKEADA)
     listaImagenCobertora.push(PRIMER_IMAGEN);
     if ((/^[0-9]/).test(IMAGEN_CLICKEADA)) {
-        puntaje++
-        $puntaje.innerHTML = puntaje;
         mostrarImagen(IMAGEN_CLICKEADA)
     }
 }
@@ -49,22 +47,33 @@ function comparar(IMAGEN_CLICKEADA) {
     }
     if (contador > 1) {
         if (listaIdsImagenesClickeadas[listaIdsImagenesClickeadas.length - 2] === listaIdsImagenesClickeadas[listaIdsImagenesClickeadas.length - 1]) {
-            $carta[listaIdsImagenesClickeadas[listaIdsImagenesClickeadas.length - 2]].setAttribute("src", listaImagenCobertora[listaImagenCobertora.length - 2]);
+            return false;
         }
         else if (listaUrlImagenesClickeadas[listaUrlImagenesClickeadas.length - 2] === listaUrlImagenesClickeadas[listaUrlImagenesClickeadas.length - 1]) {
             setTimeout(() => {
                 $carta[listaIdsImagenesClickeadas[listaIdsImagenesClickeadas.length - 1]].style.visibility = "hidden"
                 $carta[listaIdsImagenesClickeadas[listaIdsImagenesClickeadas.length - 2]].style.visibility = "hidden"
                 compronarGano();
-            }, 200);
+            }, 350);
         } else {
+            document.addEventListener("click", bloquearTercerClick, true);
             setTimeout(() => {
                 $carta[listaIdsImagenesClickeadas[listaIdsImagenesClickeadas.length - 1]].setAttribute("src", listaImagenCobertora[listaImagenCobertora.length - 1]);
                 $carta[listaIdsImagenesClickeadas[listaIdsImagenesClickeadas.length - 2]].setAttribute("src", listaImagenCobertora[listaImagenCobertora.length - 2]);
-            }, 200);
+                document.removeEventListener("click", bloquearTercerClick, true);
+            }, 350);
         }
+        if (contador >= 3) {
+            setTimeout(() => {
+                $carta.forEach(function (valor, indice) {
+                    valor.setAttribute("src", numerosImagenes[indice]);
+                });
+                $carta[listaIdsImagenesClickeadas[listaIdsImagenesClickeadas.length - 1]].setAttribute("src", listaImagenCobertora[listaImagenCobertora.length - 1]);
+            }, 350);
+        }
+        puntaje++
+        $puntaje.innerHTML = puntaje;
         contador = 0;
-
     }
 }
 
@@ -93,4 +102,9 @@ $botonReinicio.onclick = function () {
         $carta[i].setAttribute("src", numerosImagenes[i])
     }
     imagenes.sort(() => Math.random() - 0.5);
+}
+
+function bloquearTercerClick(e) {
+    e.stopPropagation();
+    e.preventDefault();
 }
