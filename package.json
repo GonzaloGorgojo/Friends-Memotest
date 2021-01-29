@@ -1,0 +1,24 @@
+{
+  "name": "memotest",
+  "version": "1.0.0",
+  "description": "Clasico Juego Memotest",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "cypress-dev": "cypress open",
+    "cypress-run": "cypress run"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GonzaloGorgojo/Memotest.git"
+  },
+  "author": "Gonzalo Gorgojo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GonzaloGorgojo/Memotest/issues"
+  },
+  "homepage": "https://github.com/GonzaloGorgojo/Memotest#readme",
+  "devDependencies": {
+    "cypress": "^6.3.0"
+  }
+}
